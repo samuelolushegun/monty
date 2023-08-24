@@ -3,8 +3,6 @@
 #include "monty.h"
 #include <string.h>
 
-stack_t *stack = NULL;
-
 #define num_instructions 7
 
 instruction_t instructions[] = {
