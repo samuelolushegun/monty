@@ -81,18 +81,18 @@ int main(int argc, char *argv[])
 	FILE *file;
 	int num_instructions;
 
-	num_instructions = 7;
+	num_instructions = sizeof(instructions) / sizeof(instructions[0]);
 
 	if (argc != 2)
 	{
-		fprintf(stderr, "Usage: %s <filename>\n", argv[0]);
+		fprintf(stderr, "USAGE: monty file\n");
 		return (EXIT_FAILURE); }
 
 
 	file = fopen(argv[1], "r");
 	if (!file)
 	{
-		perror("Error opening file");
+		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		return (EXIT_FAILURE); }
 
 	process_instructions(file, instructions, num_instructions);
