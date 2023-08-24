@@ -5,7 +5,8 @@
 
 void push(stack_t **stack, unsigned int line_number)
 {
-	int value;
+	// Retrieve the value from the instruction line parsing
+	int value; // Value extracted from the instruction line
 	stack_t *new_node;
 
 	if (value == NULL)

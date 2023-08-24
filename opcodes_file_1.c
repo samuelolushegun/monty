@@ -28,21 +28,3 @@ void add_opcode(const char *opcode, void (*f)(stack_t **stack, unsigned int line
 		return (EXIT_FAILURE);
 	}
 }
-
-void swap(stack_t **stack, unsigned int line_number) {
-	// Implementation of swap instruction
-	// Modify the stack as needed
-	// Use line_number as required
-}
-
-void add(stack_t **stack, unsigned int line_number) {
-	// Implementation ofadd instruction
-	// Modify the stack as needed
-	// Use line_number as required
-}
-
-void nop(stack_t **stack, unsigned int line_number) {
-	// Implementation of nop instruction
-	// not modify the stack
-	// Use line_number as required
-}
