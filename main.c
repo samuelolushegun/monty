@@ -3,19 +3,10 @@
 #include "monty.h"
 #include <string.h>
 
-#define num_instructions 7
+stack_t *stack = NULL;
 
-instruction_t instructions[] = {
-	{"push", push},
-	{"pall", pall},
-	{"nop", nop},
-	{"swap", swap},
-	{"add", add},
-	{"pint", pint},
-	{"pop", pop}
-};
 
-void process_instructions(FILE *file)
+void process_instructions(FILE *file, instruction_t *instructions, int num_instructions)
 {
 	opcode_data_t op_data;
 	char line[MAX_LINE_LENGTH];
@@ -31,7 +22,7 @@ void process_instructions(FILE *file)
 		{
 			instruction_t *instruction;
 
-			instruction = find_instruction(token);
+			instruction = find_instruction(token, instructions, num_instructions);
 			if (instruction)
 			{
 				token = strtok(NULL, " \t\n");
@@ -53,7 +44,7 @@ void process_instructions(FILE *file)
 	}
 }
 
-instruction_t *find_instruction(char *opcode)
+instruction_t *find_instruction(char *opcode, instruction_t *instructions, int num_instructions)
 {
 	int i;
 
@@ -71,7 +62,21 @@ instruction_t *find_instruction(char *opcode)
 
 int main(int argc, char *argv[])
 {
+	instruction_t instructions[] = {
+		{"push", push},
+		{"pall", pall},
+		{"nop", nop},
+		{"swap", swap},
+		{"add", add},
+		{"pint", pint},
+		{"pop", pop}
+	};
+	
+	
 	FILE *file;
+	int num_instructions;
+
+	num_instructions = 7;
 
 	if (argc != 2)
 	{
@@ -85,7 +90,7 @@ int main(int argc, char *argv[])
 		perror("Error opening file");
 		return (EXIT_FAILURE); }
 
-	process_instructions(file);
+	process_instructions(file, instructions, num_instructions);
 
 	fclose(file);
 	return (EXIT_SUCCESS);
