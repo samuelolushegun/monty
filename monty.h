@@ -7,7 +7,13 @@
 
 #include <stdio.h>
 
-typedef struct
+/**
+ * struct opcode_data_s - data for opcode
+ * @value: value that will be passed to the opcode
+ *
+ * Description: data
+ */
+typedef struct opcode_data_s
 {
 	int value;
 } opcode_data_t;
@@ -52,7 +58,9 @@ void pop(stack_t **stack, unsigned int line_number, void *data);
 void swap(stack_t **stack, unsigned int line_number, void *data);
 void add(stack_t **stack, unsigned int line_number, void *data);
 void nop(stack_t **stack, unsigned int line_number, void *data);
-void process_instructions(FILE *file, instruction_t *instructions, int num_instructions);
-instruction_t *find_instruction(char *opcode, instruction_t *instructions, int num_instructions);
+void process_instructions(FILE *file, instruction_t *instructions,
+			  int num_instructions);
+instruction_t *find_instruction(char *opcode, instruction_t *instructions,
+				int num_instructions);
 
 #endif /* MONTY_H */

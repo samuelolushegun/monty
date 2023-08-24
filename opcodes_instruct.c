@@ -2,14 +2,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
+/**
+ * push - push opcode
+ * @stack: poniter to a stack
+ * @line_number: nth line
+ * @data: data will be passed
+ *
+ * return: Nothing
+ */
 void push(stack_t **stack, unsigned int line_number, void *data)
 {
 	opcode_data_t *op_data;
 	int value;
 	stack_t *new_node;
 
-	op_data = (opcode_data_t*)data;
+	op_data = (opcode_data_t *)data;
 	value = op_data->value;
 
 	if (value == 0)
@@ -36,6 +43,14 @@ void push(stack_t **stack, unsigned int line_number, void *data)
 	*stack = new_node;
 }
 
+/**
+ * pall - pall opcode
+ * @stack: pointer to a stack
+ * @line_number: nth line
+ * @data: data will be passed
+ *
+ * return: Nothing
+ */
 void pall(stack_t **stack, unsigned int line_number, void *data)
 {
 	stack_t *currentNode;
@@ -50,6 +65,14 @@ void pall(stack_t **stack, unsigned int line_number, void *data)
 		currentNode = currentNode->next; }
 }
 
+/**
+ * pint - pint opcode
+ * @stack: pointer to a stack
+ * @line_number: nth line
+ * @data: data will be passed
+ *
+ * return: Nothing
+ */
 void pint(stack_t **stack, unsigned int line_number, void *data)
 {
 	(void)data;
@@ -62,6 +85,14 @@ void pint(stack_t **stack, unsigned int line_number, void *data)
 	printf("%d\n", (*stack)->n);
 }
 
+/**
+ * pop - pop opcode
+ * @stack: pointer to a stack
+ * @line_number: nth line
+ * @data: data will be passed
+ *
+ * return: Nothing
+ */
 void pop(stack_t **stack, unsigned int line_number, void *data)
 {
 	stack_t *temp;
@@ -84,6 +115,14 @@ void pop(stack_t **stack, unsigned int line_number, void *data)
 	free(temp);
 }
 
+/**
+ * swap - swap opcode
+ * @stack: pointer to a stack
+ * @line_number: nth line
+ * @data: data will be passed
+ *
+ * return: Nothing
+ */
 void swap(stack_t **stack, unsigned int line_number, void *data)
 {
 	stack_t *first;

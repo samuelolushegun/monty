@@ -2,6 +2,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/**
+ * add - add opcode
+ * @stack: our stack
+ * @line_number: nth line number
+ * @data: data for opcode
+ */
 void add(stack_t **stack, unsigned int line_number, void *data)
 {
 	stack_t *first;
@@ -27,6 +33,12 @@ void add(stack_t **stack, unsigned int line_number, void *data)
 	free(first);
 }
 
+/**
+ * nop - nop opcode
+ * @stack: our stack
+ * @line_number: nth line number
+ * @data: data for opcode
+ */
 void nop(stack_t **stack, unsigned int line_number, void *data)
 {
 	(void)data;

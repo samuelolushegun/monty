@@ -5,8 +5,8 @@
 
 stack_t *stack = NULL;
 
-
-void process_instructions(FILE *file, instruction_t *instructions, int num_instructions)
+void process_instructions(FILE *file, instruction_t *instructions, int
+			  num_instructions)
 {
 	opcode_data_t op_data;
 	char line[MAX_LINE_LENGTH];
@@ -33,7 +33,7 @@ void process_instructions(FILE *file, instruction_t *instructions, int num_instr
 				else
 				{
 					op_data.value = 0; }
-		
+
 				instruction->f(&stack, line_number, &op_data); }
 			else
 			{
@@ -44,10 +44,10 @@ void process_instructions(FILE *file, instruction_t *instructions, int num_instr
 	}
 }
 
-instruction_t *find_instruction(char *opcode, instruction_t *instructions, int num_instructions)
+instruction_t *find_instruction(char *opcode, instruction_t *instructions, int
+				num_instructions)
 {
 	int i;
-
 
 	for (i = 0; i < num_instructions; i++)
 	{
@@ -59,7 +59,13 @@ instruction_t *find_instruction(char *opcode, instruction_t *instructions, int n
 	return (NULL);
 }
 
-
+/**
+ * main - main function for monty
+ * @argc: lentgh of argv
+ * @argv: array
+ *
+ * Return: O or 1
+ */
 int main(int argc, char *argv[])
 {
 	instruction_t instructions[] = {
@@ -71,8 +77,7 @@ int main(int argc, char *argv[])
 		{"pint", pint},
 		{"pop", pop}
 	};
-	
-	
+
 	FILE *file;
 	int num_instructions;
 
