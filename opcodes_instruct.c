@@ -5,22 +5,20 @@
 
 void push(stack_t **stack, unsigned int line_number)
 {
-	// Retrieve the value from the instruction line parsing
-	int value; // Value extracted from the instruction line
 	stack_t *new_node;
 
 	if (value == NULL)
 	{
 		fprintf(stderr, "L%d: usage: push integer", line_number);
-		exit(EXIT_FAILURE); }
-
-
+		exit(EXIT_FAILURE);
+	}
 
 	new_node = malloc(sizeof(stack_t));
 	if (new_node == NULL)
 	{
-		fprintf(stderr, "Memory allocation failed\n");
-		exit(EXIT_FAILURE); }
+		fprintf(stderr, "Error: malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
 
 	new_node->n = value;
 	new_node->next = *stack;
@@ -32,7 +30,7 @@ void pall(stack_t **stack, unsigned int line_number)
 	stack_t *currentNode;
 
 	currentNode = *stack;
-	(void)line_number; 
+	(void)line_number;
 
 	while (currentNode != NULL)
 	{
