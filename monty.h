@@ -3,7 +3,14 @@
 
 #define MAX_OPCODES 100
 
-#define MAX_LINE_LENGTH 1024
+#define MAX_LINE_LENGTH 102
+
+#include <stdio.h>
+
+typedef struct
+{
+	int value;
+} opcode_data_t;
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -32,19 +39,21 @@ typedef struct stack_s
 typedef struct instruction_s
 {
 	char *opcode;
-	void (*f)(stack_t **stack, unsigned int line_number);
+	void (*f)(stack_t **stack, unsigned int line_number, void *data);
 } instruction_t;
 
+extern instruction_t instructions[];
 
 
-
-void push(stack_t **stack, unsigned int line_number);
-void pall(stack_t **stack, unsigned int line_number);
-void pint(stack_t **stack, unsigned int line_number);
-void pop(stack_t **stack, unsigned int line_number);
-void swap(stack_t **stack, unsigned int line_number);
-void add(stack_t **stack, unsigned int line_number);
-void nop(stack_t **stack, unsigned int line_number);
+void push(stack_t **stack, unsigned int line_number, void *data);
+void pall(stack_t **stack, unsigned int line_number, void *data);
+void pint(stack_t **stack, unsigned int line_number, void *data);
+void pop(stack_t **stack, unsigned int line_number, void *data);
+void swap(stack_t **stack, unsigned int line_number, void *data);
+void add(stack_t **stack, unsigned int line_number, void *data);
+void nop(stack_t **stack, unsigned int line_number, void *data);
+instruction_t *find_instruction(char *opcode);
+void process_instructions(FILE *file);
 
 
 #endif /* MONTY_H */

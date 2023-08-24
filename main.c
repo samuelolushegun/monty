@@ -1,53 +1,95 @@
-#include "monty.h"
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include "monty.h"
 #include <string.h>
 
-int value;
+stack_t *stack = NULL;
+
+#define num_instructions 7
+
+instruction_t instructions[] = {
+	{"push", push},
+	{"pall", pall},
+	{"nop", nop},
+	{"swap", swap},
+	{"add", add},
+	{"pint", pint},
+	{"pop", pop}
+};
+
+void process_instructions(FILE *file)
+{
+	opcode_data_t op_data;
+	char line[MAX_LINE_LENGTH];
+	unsigned int line_number;
+
+	line_number = 1;
+
+	while (fgets(line, sizeof(line), file))
+	{
+		char *token = strtok(line, " \t\n");
+
+		if (token)
+		{
+			instruction_t *instruction;
+
+			instruction = find_instruction(token);
+			if (instruction)
+			{
+				token = strtok(NULL, " \t\n");
+				if (token)
+				{
+					op_data.value = atoi(token); }
+
+				else
+				{
+					op_data.value = 0; }
+		
+				instruction->f(&stack, line_number, &op_data); }
+			else
+			{
+				fprintf(stderr, "L%d: unknown instructions %s\n", line_number, token);
+				exit(EXIT_FAILURE); }
+		}
+		line_number++;
+	}
+}
+
+instruction_t *find_instruction(char *opcode)
+{
+	int i;
+
+
+	for (i = 0; i < num_instructions; i++)
+	{
+		if (strcmp(opcode, instructions[i].opcode) == 0)
+		{
+			return (&instructions[i]); }
+	}
+
+	return (NULL);
+}
+
 
 int main(int argc, char *argv[])
 {
-	stack_t *init_stack;
+	FILE *file;
 
 	if (argc != 2)
 	{
-		fprintf(stderr, "USAGE: monty file\n");
-		return (EXIT_FAILURE);
-	}
+		fprintf(stderr, "Usage: %s <filename>\n", argv[0]);
+		return (EXIT_FAILURE); }
 
-	FILE *m_file = fopen(argv[1], "r");
-	if (m_file == NULL)
+
+	file = fopen(argv[1], "r");
+	if (!file)
 	{
-		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-		return (EXIT_FAILURE);
-	}
+		perror("Error opening file");
+		return (EXIT_FAILURE); }
 
-	char line_char[MAX_LINE_LENGTH];
-	int line_number = 0;
+	process_instructions(file);
 
-	while (fgets(line_char, sizeof(line_char), m_file) != NULL)
-	{
-		line_number++;
+	fclose(file);
+	return (EXIT_SUCCESS);
 
-		if (line_char[strlen(line_char) - 1] == '\n')
-		{
-			line_char[strlen(line_char) - 1] = '\0';
-		}
-		/* the following if statement handle opcode puch and his valu*/
-		if (sscanf(line_char, "push %d", &value) == 1)
-		{
-			for (size_t i = 0; i < sizeof(opcodes_list) / sizeof(opcodes_list[0]); i++)
-			{
-				if (strcmp(opcodes_list[i]->opcode, "push") == 0)
-				{
-					opcodes_list[i]->f(&init_stack, line_number);
-					break;
-				}
-			}
-		}else
-			process_line(line_char, line_number);/*this checks others opcodes */
-	}
-
-	fclose(m_file);
-	return EXIT_SUCCESS;
 }
