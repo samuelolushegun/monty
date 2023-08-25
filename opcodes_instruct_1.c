@@ -1,6 +1,26 @@
 #include "monty.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
+
+/**
+ * is_all_digits - Check if a string consists of digits only.
+ * @str: The input string to be checked.
+ *
+ * Return: 1 if the string consists of digits only, 0 otherwise.
+ */
+int is_all_digits(const char *str)
+{
+	while (*str)
+	{
+		if (!isdigit(*str))
+		{
+			return (0);
+		}
+		str++;
+	}
+	return (1);
+}
 
 /**
  * add - add opcode
