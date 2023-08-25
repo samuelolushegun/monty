@@ -22,6 +22,7 @@ void push(stack_t **stack, unsigned int line_number, void *data)
 	if (op_data->value == NULL || !is_all_digits(op_data->value))
 	{
 		fprintf(stderr, "L%d: usage: push integer", line_number);
+		free_stack(stack);
 		exit(EXIT_FAILURE); }
 
 	value = atoi(op_data->value);
@@ -30,6 +31,7 @@ void push(stack_t **stack, unsigned int line_number, void *data)
 	if (new_node == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
+		free_stack(stack);
 		exit(EXIT_FAILURE); }
 
 	new_node->n = value;
@@ -81,6 +83,7 @@ void pint(stack_t **stack, unsigned int line_number, void *data)
 	if (*stack == NULL)
 	{
 		fprintf(stderr, "L<%d>: can't pint, stack empty\n", line_number);
+		free_stack(stack);
 		exit(EXIT_FAILURE); }
 
 	printf("%d\n", (*stack)->n);
@@ -104,6 +107,7 @@ void pop(stack_t **stack, unsigned int line_number, void *data)
 	if (*stack == NULL)
 	{
 		fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
+		free_stack(stack);
 		exit(EXIT_FAILURE); }
 
 
@@ -136,6 +140,7 @@ void swap(stack_t **stack, unsigned int line_number, void *data)
 	if (*stack == NULL || (*stack)->next == NULL)
 	{
 		fprintf(stderr, "L<%d>: can't swap, stack too short\n", line_number);
+		free_stack(stack);
 		exit(EXIT_FAILURE); }
 
 

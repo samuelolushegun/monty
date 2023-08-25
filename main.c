@@ -93,6 +93,7 @@ int main(int argc, char *argv[])
 	if (!file)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
+		free_stack(&stack);
 		return (EXIT_FAILURE); }
 
 	process_instructions(file, instructions, num_instructions);
