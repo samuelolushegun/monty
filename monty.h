@@ -15,7 +15,7 @@
  */
 typedef struct opcode_data_s
 {
-	int value;
+	char *value;
 } opcode_data_t;
 
 /**

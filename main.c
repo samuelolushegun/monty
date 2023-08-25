@@ -28,11 +28,11 @@ void process_instructions(FILE *file, instruction_t *instructions, int
 				token = strtok(NULL, " \t\n");
 				if (token)
 				{
-					op_data.value = atoi(token); }
+					op_data.value = token; }
 
 				else
 				{
-					op_data.value = 0; }
+					op_data.value = NULL; }
 
 				instruction->f(&stack, line_number, &op_data); }
 			else

@@ -1,6 +1,26 @@
 #include "monty.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
+
+/**
+ * is_all_digits - Check if a string consists of digits only.
+ * @str: The input string to be checked.
+ *
+ * Return: 1 if the string consists of digits only, 0 otherwise.
+ */
+int is_all_digits(const char *str)
+{
+	while (*str)
+	{
+		if (!isdigit(*str))
+		{
+			return (0);
+		}
+		str++;
+	}
+	return (1);
+}
 
 /**
  * push - push opcode
@@ -17,14 +37,13 @@ void push(stack_t **stack, unsigned int line_number, void *data)
 	stack_t *new_node;
 
 	op_data = (opcode_data_t *)data;
-	value = op_data->value;
 
-	if (value == 0)
+	if (op_data->value == NULL || !is_all_digits(op_data->value))
 	{
 		fprintf(stderr, "L%d: usage: push integer", line_number);
 		exit(EXIT_FAILURE); }
 
-
+	value = atoi(op_data->value);
 
 	new_node = malloc(sizeof(stack_t));
 	if (new_node == NULL)
