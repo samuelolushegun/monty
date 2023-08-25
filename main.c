@@ -96,8 +96,9 @@ int main(int argc, char *argv[])
 		return (EXIT_FAILURE); }
 
 	process_instructions(file, instructions, num_instructions);
-
+	
 	fclose(file);
+	free_stack(&stack);
 	return (EXIT_SUCCESS);
 
 }

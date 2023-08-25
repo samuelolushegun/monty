@@ -50,6 +50,8 @@ typedef struct instruction_s
 
 extern instruction_t instructions[];
 
+
+void free_stack(stack_t **stack);
 int is_all_digits(const char *str);
 void push(stack_t **stack, unsigned int line_number, void *data);
 void pall(stack_t **stack, unsigned int line_number, void *data);

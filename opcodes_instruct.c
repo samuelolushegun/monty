@@ -63,6 +63,7 @@ void pall(stack_t **stack, unsigned int line_number, void *data)
 	{
 		printf("%d\n", currentNode->n);
 		currentNode = currentNode->next; }
+		
 }
 
 /**
@@ -83,6 +84,7 @@ void pint(stack_t **stack, unsigned int line_number, void *data)
 		exit(EXIT_FAILURE); }
 
 	printf("%d\n", (*stack)->n);
+	
 }
 
 /**
