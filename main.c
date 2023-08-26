@@ -37,7 +37,7 @@ void process_instructions(FILE *file, instruction_t *instructions, int
 				instruction->f(&stack, line_number, &op_data); }
 			else
 			{
-				fprintf(stderr, "L%d: unknown instructions %s\n", line_number, token);
+				fprintf(stderr, "L%d: unknown instruction %s\n", line_number, token);
 				exit(EXIT_FAILURE); }
 		}
 		line_number++;
