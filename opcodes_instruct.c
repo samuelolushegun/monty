@@ -18,14 +18,20 @@ void push(stack_t **stack, unsigned int line_number, void *data)
 	stack_t *new_node;
 
 	op_data = (opcode_data_t *)data;
-
-	if (op_data->value == NULL || !is_all_digits(op_data->value))
+	
+	if (op_data->value[0] == '-')
+	{
+		value = (-1 * atoi(op_data->value)); } 
+		
+	else if (op_data->value == NULL || !is_all_digits(op_data->value))
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		free_stack(stack);
 		exit(EXIT_FAILURE); }
-
-	value = atoi(op_data->value);
+		
+	else
+	{
+	value = atoi(op_data->value); }
 
 	new_node = malloc(sizeof(stack_t));
 	if (new_node == NULL)
