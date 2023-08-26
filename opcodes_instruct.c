@@ -21,7 +21,7 @@ void push(stack_t **stack, unsigned int line_number, void *data)
 
 	if (op_data->value == NULL || !is_all_digits(op_data->value))
 	{
-		fprintf(stderr, "L%d: usage: push integer", line_number);
+		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		free_stack(stack);
 		exit(EXIT_FAILURE); }
 
