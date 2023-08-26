@@ -14,16 +14,18 @@
  */
 void free_stack(stack_t **stack)
 {
-    stack_t *currentNode = *stack;
+	stack_t *currentNode = *stack;
 
-    while (currentNode)
-    {
-        stack_t *temp = currentNode;
-        currentNode = currentNode->next;
-        free(temp);
-    }
+	while (currentNode)
+	{
+		stack_t *temp = currentNode;
 
-    *stack = NULL;
+		currentNode = currentNode->next;
+
+		free(temp);
+	}
+
+	*stack = NULL;
 }
 
 /**

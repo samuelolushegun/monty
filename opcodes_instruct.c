@@ -18,17 +18,18 @@ void push(stack_t **stack, unsigned int line_number, void *data)
 	stack_t *new_node;
 
 	op_data = (opcode_data_t *)data;
-		
-	if (op_data->value == NULL || (!is_all_digits(op_data->value) && op_data->value[0] != '-'))
+
+	if (op_data->value == NULL || (!is_all_digits(op_data->value)
+		&& op_data->value[0] != '-'))
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		free_stack(stack);
 		exit(EXIT_FAILURE); }
-		
+
 	if (op_data->value[0] == '-')
 	{
 		value = (-1 * atoi(op_data->value)); }
-		
+
 	else
 	{
 	value = atoi(op_data->value); }
@@ -71,7 +72,7 @@ void pall(stack_t **stack, unsigned int line_number, void *data)
 	{
 		printf("%d\n", currentNode->n);
 		currentNode = currentNode->next; }
-		
+
 }
 
 /**
@@ -93,7 +94,6 @@ void pint(stack_t **stack, unsigned int line_number, void *data)
 		exit(EXIT_FAILURE); }
 
 	printf("%d\n", (*stack)->n);
-	
 }
 
 /**
