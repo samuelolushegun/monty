@@ -75,7 +75,10 @@ int main(int argc, char *argv[])
 		{"swap", swap},
 		{"add", add},
 		{"pint", pint},
-		{"pop", pop}
+		{"pop", pop},
+		{"sub", sub},
+		{"div", div_ide},
+		{"mul", mul}
 	};
 
 	FILE *file;
