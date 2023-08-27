@@ -11,13 +11,21 @@ void process_instructions(FILE *file, instruction_t *instructions, int
 	opcode_data_t op_data;
 	char line[MAX_LINE_LENGTH];
 	unsigned int line_number;
+	char *token;
 
 	line_number = 1;
-
 	while (fgets(line, sizeof(line), file))
 	{
-		char *token = strtok(line, " \t\n");
+		char *trimmed_line = line;
 
+		while (*trimmed_line == ' ' || *trimmed_line == '\t')
+		{
+			trimmed_line++; }
+		if (*trimmed_line == '#' || *trimmed_line == '\n')
+		{
+			line_number++;
+			continue; }
+		token = strtok(line, " \t\n");
 		if (token)
 		{
 			instruction_t *instruction;
@@ -29,11 +37,9 @@ void process_instructions(FILE *file, instruction_t *instructions, int
 				if (token)
 				{
 					op_data.value = token; }
-
 				else
 				{
 					op_data.value = NULL; }
-
 				instruction->f(&stack, line_number, &op_data); }
 			else
 			{
@@ -78,7 +84,8 @@ int main(int argc, char *argv[])
 		{"pop", pop},
 		{"sub", sub},
 		{"div", div_ide},
-		{"mul", mul}
+		{"mul", mul},
+		{"mod", mod}
 	};
 
 	FILE *file;
